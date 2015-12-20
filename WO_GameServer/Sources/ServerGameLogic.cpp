@@ -884,7 +884,7 @@ else
 {
     sprintf(plr2msg, "KILLED BY %s", killedByPlr->loadout_->Gamertag);
 // Enable this below to if you have "Player exp from my other tutorial"
-//gServerLogic.AddPlayerReward(killedByPlr, RWD_PlayerKill, 0);// the 0 can be removed if your not using "Allright source"
+    gServerLogic.AddPlayerReward(killedByPlr, RWD_PlayerKill /*, 0 */);// the 0 can be removed if your not using "Allright source"
     char chatmessage[128] = {0};
     PKT_C2C_ChatMessage_s n;
     sprintf(chatmessage, "%s Killed By %s.",targetPlr->loadout_->Gamertag,killedByPlr->loadout_->Gamertag);
@@ -938,6 +938,8 @@ else
 		{
 			r3dscpy( targetPlr->aggressor, ((obj_ServerPlayer*)sourceObj)->userName );
 			targetPlr->killedBy = obj_ServerGravestone::KilledBy_Player;
+			obj_ServerPlayer * killerPlr = ((obj_ServerPlayer*)sourceObj);
+            gServerLogic.AddPlayerReward(killerPlr, RWD_PlayerKill);
 		}
 		else
 		{
@@ -959,6 +961,8 @@ else
 		{
 			r3dscpy( targetPlr->aggressor, p->userName );
 			targetPlr->killedBy = obj_ServerGravestone::KilledBy_Player;
+			obj_ServerPlayer * killerPlr = ((obj_ServerPlayer*)sourceObj);
+            gServerLogic.AddPlayerReward(killerPlr, RWD_PlayerKill);
 		}
 	}
 #endif
