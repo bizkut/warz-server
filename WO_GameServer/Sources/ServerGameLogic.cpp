@@ -2733,6 +2733,9 @@ int ServerGameLogic::ProcessChatCommand(obj_ServerPlayer* plr, const char* cmd)
 	if(strncmp(cmd, "/sv", 3) == 0 && plr->profile_.ProfileData.isDevAccount)
 		return Cmd_SetVitals(plr, cmd);
 
+	if(strncmp(cmd, "/kill", 4) == 0 && plr->profile_.ProfileData.isDevAccount)
+        return Cmd_Kill(plr, cmd);
+
 	if(strncmp(cmd, "/dev", 3) == 0 && plr->profile_.ProfileData.isDevAccount)
         return Cmd_DevKit(plr, cmd);
 
@@ -3114,6 +3117,40 @@ int ServerGameLogic::Cmd_SetVitals(obj_ServerPlayer* plr, const char* cmd)
 	plr->loadout_->MedBloodInfection = 0.0f;
 
 	return 0;
+}
+
+int ServerGameLogic::GetPlayerStruct(peerInfo_s& pr, const char* user)
+{
+ for(int i=0; i<MAX_PEERS_COUNT; ++i)
+ {
+     pr = GetPeer(i);
+     if (pr.status_ == PEER_PLAYING && pr.player && (strcmp(pr.player->userName, user) == 0) )
+         return 1;
+ }
+ return 0;
+}
+
+int ServerGameLogic::Cmd_Kill(obj_ServerPlayer* plr, const char* cmd)
+{
+    char buf[128];
+    char user[128];
+    peerInfo_s pr;
+
+
+
+
+    if(2 != sscanf(cmd, "%s %s", buf, user))
+        return 2;
+    
+    if (GetPlayerStruct(pr, user))
+    {
+        pr.player->loadout_->Health = 0;
+        
+        r3dOutToLog("Cmd_SetPlayervitals: %s is dead\n", user);
+        return 0;
+    }
+    r3dOutToLog("Cmd_kill: Player %s not Found!", user);
+    return 2;
 }
 
 int ServerGameLogic::Cmd_DevKit(obj_ServerPlayer* plr, const char* cmd)

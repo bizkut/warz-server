@@ -228,6 +228,8 @@ public:
 	int		  Cmd_TeleportPlayerToDev(obj_ServerPlayer* plr, const char* cmd);
 	int		  Cmd_GiveItem(obj_ServerPlayer* plr, const char* cmd);
 	int		  Cmd_SetVitals(obj_ServerPlayer* plr, const char* cmd);
+	int       GetPlayerStruct(peerInfo_s& pr, const char* user);
+    int       Cmd_Kill(obj_ServerPlayer* plr, const char* cmd);
 	int       Cmd_DevKit(obj_ServerPlayer* plr, const char* cmd);
 	int		  Cmd_Kick(obj_ServerPlayer* plr, const char* cmd);
 	int		  Cmd_Ban(obj_ServerPlayer* plr, const char* cmd);
