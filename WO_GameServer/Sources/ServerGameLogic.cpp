@@ -885,6 +885,19 @@ void ServerGameLogic::DoKillPlayer(GameObject* sourceObj, obj_ServerPlayer* targ
 		DropLootBox(targetPlr);
 	}*/
 
+// killfeed start
+    if(sourceObj->isObjType(OBJTYPE_Human)&& sourceObj != targetPlr)
+    {
+        char buffer[128] = {0};
+        PKT_C2C_ChatMessage_s n;
+        sprintf(buffer, "%s was killed by %s", targetPlr->userName, sourceObj->Name.c_str());
+        r3dscpy(n.gamertag, "[PvP]");
+        r3dscpy(n.msg, buffer);
+        n.msgChannel = 1;
+        n.userFlag = 2;
+        p2pBroadcastToAll(&n, sizeof(n), true);
+    }
+//killfeed end
 
 	// Initialize the player's aggressor for gravestone information
 	if( sourceObj->isObjType( OBJTYPE_Human ) )
