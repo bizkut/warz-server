@@ -878,7 +878,7 @@ void ServerGameLogic::DoKillPlayer(GameObject* sourceObj, obj_ServerPlayer* targ
     r3dscpy(n.msg, chatmessage);
     n.msgChannel = 1;
     n.userFlag = 2;
-    p2pBroadcastToAll(NULL, &n, sizeof(n), true);
+    p2pBroadcastToAll(/*NULL,*/ &n, sizeof(n), true);
 }
 else
 {
@@ -892,7 +892,7 @@ else
     r3dscpy(n.msg, chatmessage);
     n.msgChannel = 1;
     n.userFlag = 2;
-    p2pBroadcastToAll(NULL, &n, sizeof(n), true);
+    p2pBroadcastToAll(/*NULL,*/ &n, sizeof(n), true);
 }
 }
     else if(sourceObj->isObjType(OBJTYPE_Zombie))
@@ -905,7 +905,7 @@ else
     r3dscpy(n.msg, chatmessage);
     n.msgChannel = 1;
     n.userFlag = 2;
-    p2pBroadcastToAll(NULL, &n, sizeof(n), true);
+    p2pBroadcastToAll(/*NULL,*/ &n, sizeof(n), true);
 }
 else
 {
