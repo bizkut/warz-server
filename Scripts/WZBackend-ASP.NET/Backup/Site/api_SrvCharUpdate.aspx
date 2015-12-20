@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" ValidateRequest="false" CodeFile="api_SrvCharUpdate.aspx.cs" Inherits="api_SrvCharUpdate" %>

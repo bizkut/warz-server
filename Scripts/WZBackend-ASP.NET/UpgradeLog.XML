@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="WZBackend-ASP.NET">
+</Property><Property Name="Solution File" Value="C:\WarZ\server\src\Scripts\WZBackend-ASP.NET\WZBackend-ASP.NET.sln">
+</Property><Property Name="User Options File" Value="C:\WarZ\server\src\Scripts\WZBackend-ASP.NET\WZBackend-ASP.NET.suo">
+</Property><Property Name="Date" Value="Sunday, December 20, 2015">
+</Property><Property Name="Time" Value="16:49 PM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="WZBackend-ASP.NET.sln" Description="File successfully backed up as C:\WarZ\server\src\Scripts\WZBackend-ASP.NET\Backup\WZBackend-ASP.NET.sln">
+</Event><Event ErrorLevel="0" Project="" Source="WZBackend-ASP.NET.suo" Description="File successfully backed up as C:\WarZ\server\src\Scripts\WZBackend-ASP.NET\Backup\WZBackend-ASP.NET.suo">
+</Event><Event ErrorLevel="0" Project="" Source="WZBackend-ASP.NET.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="WZBackend-ASP.NET.sln" Description="Converted">
+</Event></UpgradeLog>
