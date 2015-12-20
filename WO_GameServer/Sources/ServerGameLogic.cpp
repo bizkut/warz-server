@@ -864,7 +864,53 @@ int ServerGameLogic::getReputationKillEffect(int repFromPlr, int repKilledPlr)
 void ServerGameLogic::DoKillPlayer(GameObject* sourceObj, obj_ServerPlayer* targetPlr, STORE_CATEGORIES weaponCat, bool forced_by_server, bool fromPlayerInAir, bool targetPlayerInAir )
 {
 	r3dOutToLog("%s killed by %s, forced: %d\n", targetPlr->userName, sourceObj->Name.c_str(), (int)forced_by_server);
-
+    char plr2msg[128] = {0};  // Remove this line if you use src WarZTHSrc2
+    if(IsServerPlayer(sourceObj))
+{
+    obj_ServerPlayer * killedByPlr = ((obj_ServerPlayer*)sourceObj);
+    if (targetPlr->profile_.CustomerID == killedByPlr->profile_.CustomerID)
+{
+    sprintf(plr2msg, "Commit Suicide");
+    char chatmessage[128] = {0};
+    PKT_C2C_ChatMessage_s n;
+    sprintf(chatmessage, "%s Suicided.",targetPlr->loadout_->Gamertag);
+    r3dscpy(n.gamertag, "<System>");
+    r3dscpy(n.msg, chatmessage);
+    n.msgChannel = 1;
+    n.userFlag = 2;
+    p2pBroadcastToAll(NULL, &n, sizeof(n), true);
+}
+else
+{
+    sprintf(plr2msg, "KILLED BY %s", killedByPlr->loadout_->Gamertag);
+// Enable this below to if you have "Player exp from my other tutorial"
+//gServerLogic.AddPlayerReward(killedByPlr, RWD_PlayerKill, 0);// the 0 can be removed if your not using "Allright source"
+    char chatmessage[128] = {0};
+    PKT_C2C_ChatMessage_s n;
+    sprintf(chatmessage, "%s Killed By %s.",targetPlr->loadout_->Gamertag,killedByPlr->loadout_->Gamertag);
+    r3dscpy(n.gamertag, "<System>");
+    r3dscpy(n.msg, chatmessage);
+    n.msgChannel = 1;
+    n.userFlag = 2;
+    p2pBroadcastToAll(NULL, &n, sizeof(n), true);
+}
+}
+    else if(sourceObj->isObjType(OBJTYPE_Zombie))
+{
+    sprintf(plr2msg, "EATEN BY ZOMBIE");
+    char chatmessage[128] = {0};
+    PKT_C2C_ChatMessage_s n;
+    sprintf(chatmessage, "Zombies ate %s",targetPlr->loadout_->Gamertag);
+    r3dscpy(n.gamertag, "<System>");
+    r3dscpy(n.msg, chatmessage);
+    n.msgChannel = 1;
+    n.userFlag = 2;
+    p2pBroadcastToAll(NULL, &n, sizeof(n), true);
+}
+else
+{
+    sprintf(plr2msg, "Commit Suicide"); 
+}
 	// sent kill packet
 	{
 #ifdef VEHICLES_ENABLED
@@ -884,20 +930,6 @@ void ServerGameLogic::DoKillPlayer(GameObject* sourceObj, obj_ServerPlayer* targ
 	{
 		DropLootBox(targetPlr);
 	}*/
-
-// killfeed start
-    if(sourceObj->isObjType(OBJTYPE_Human)&& sourceObj != targetPlr)
-    {
-        char buffer[128] = {0};
-        PKT_C2C_ChatMessage_s n;
-        sprintf(buffer, "%s was killed by %s", targetPlr->userName, sourceObj->Name.c_str());
-        r3dscpy(n.gamertag, "[PvP]");
-        r3dscpy(n.msg, buffer);
-        n.msgChannel = 1;
-        n.userFlag = 2;
-        p2pBroadcastToAll(&n, sizeof(n), true);
-    }
-//killfeed end
 
 	// Initialize the player's aggressor for gravestone information
 	if( sourceObj->isObjType( OBJTYPE_Human ) )
