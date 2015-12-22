@@ -11,7 +11,7 @@ Target Server Type    : SQL Server
 Target Server Version : 105000
 File Encoding         : 65001
 
-Date: 2015-12-22 12:04:35
+Date: 2015-12-21 22:49:05
 */
 
 
@@ -185,24 +185,6 @@ GO
 
 -- ----------------------------
 -- Records of Achievements
--- ----------------------------
-
--- ----------------------------
--- Table structure for Application_Revive
--- ----------------------------
-DROP TABLE [dbo].[Application_Revive]
-GO
-CREATE TABLE [dbo].[Application_Revive] (
-[CustomerID] int NOT NULL ,
-[Point] int NOT NULL ,
-[PointTotal] int NOT NULL 
-)
-
-
-GO
-
--- ----------------------------
--- Records of Application_Revive
 -- ----------------------------
 
 -- ----------------------------
@@ -390,28 +372,6 @@ GO
 GO
 SET IDENTITY_INSERT [dbo].[DataGPConvertRates] OFF
 GO
-
--- ----------------------------
--- Table structure for DataSkill2Price
--- ----------------------------
-DROP TABLE [dbo].[DataSkill2Price]
-GO
-CREATE TABLE [dbo].[DataSkill2Price] (
-[SkillID] int NOT NULL ,
-[SkillName] varchar(64) NULL ,
-[Lv1] int NULL ,
-[Lv2] int NULL ,
-[Lv3] int NULL ,
-[Lv4] int NULL ,
-[Lv5] int NULL 
-)
-
-
-GO
-
--- ----------------------------
--- Records of DataSkill2Price
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for DataSkillPrice
@@ -14833,16 +14793,6 @@ CREATE INDEX [IX_Achievements_CustomerID] ON [dbo].[Achievements]
 GO
 
 -- ----------------------------
--- Indexes structure for table Application_Revive
--- ----------------------------
-
--- ----------------------------
--- Primary Key structure for table Application_Revive
--- ----------------------------
-ALTER TABLE [dbo].[Application_Revive] ADD PRIMARY KEY ([CustomerID])
-GO
-
--- ----------------------------
 -- Indexes structure for table CheatLog
 -- ----------------------------
 
@@ -14918,16 +14868,6 @@ GO
 -- Primary Key structure for table DataGameRewards
 -- ----------------------------
 ALTER TABLE [dbo].[DataGameRewards] ADD PRIMARY KEY ([ID])
-GO
-
--- ----------------------------
--- Indexes structure for table DataSkill2Price
--- ----------------------------
-
--- ----------------------------
--- Primary Key structure for table DataSkill2Price
--- ----------------------------
-ALTER TABLE [dbo].[DataSkill2Price] ADD PRIMARY KEY ([SkillID])
 GO
 
 -- ----------------------------
